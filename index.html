@@ -1,20 +1,25 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta http-equiv="X-UA-Compatible" content="ie=edge">
     <title>test-froala</title>
-    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg" crossorigin="anonymous">
-    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link rel="stylesheet" href="css/bootstrap-4.0.0-dist/css/bootstrap.min.css">
+    <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.0.10/css/all.css" integrity="sha384-+d0P83n9kaQMCwj8F4RJB66tzIwOKmrdb46+porD/OvrJ+37WqIM7UoBtwHO6Nlg"
+        crossorigin="anonymous">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.4.0/css/font-awesome.min.css" rel="stylesheet" type="text/css"
+    />
     <link rel="stylesheet" href="css/css.css">
     <link rel="stylesheet" href="css/froala_style.min.css">
     <link rel="stylesheet" href="css/froala_editor.pkgd.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css">
-    
+
 </head>
+
 <body>
-    
+
     <textarea id="froala-content"></textarea>
     <pre class="test-pre"></pre>
     <!-- TEST HIGHLIGHT JS -->
@@ -35,45 +40,45 @@
 
     </code></pre> -->
 
-    <div id="highlight-popup">
-        <div class="hljs-popup__title">
-            Code Snipet
-        </div>
-        <div class="hljs-popup__lang">
-            <div class="hljs-popup__lang-title">
-                Lựa chọn ngôn ngữ
+    <div id="highlight-popup" class="container-fluid">
+        <div class="highlight__wrap">
+            <div class="text-capitalize hljs-popup__title">
+                Code Snipet
             </div>
-                <select name="" id="">
-                        <option value="CSS">CSS</option>
-            
-                    </select>
-        </div>
-        <div class="hljs-popup__text-content">
-            <textarea name="" id="" cols="30" rows="10"></textarea>
-        </div>
-        <div class="hljs-popup_submit">
-            <div class="cancel-wrap">
-                Thoát
-            </div>
-            <div class="submit-wrap">
-                Đồng ý
-            </div>
-        </div>
-        <div class="hljs-popup__close">
-                <i class="fas fa-times-circle"></i>
-        </div>
+            <div class="hljs-popup__lang">
+                <div class="hljs-popup__lang-title">
+                    Lựa chọn ngôn ngữ
+                </div>
+                <select class="language__list" name="" id="list-language">
+                    <option value="">Not - set</option>
+                    
 
+                </select>
+            </div>
+            <div class="hljs-popup__text-content">
+                <textarea id="input-code" class="hljs-popup__text-area" name="" id="" cols="30" rows="10"></textarea>
+            </div>
+            <div class="hljs-popup_submit">
+                <div class="btn btn-success submit">Đồng ý</div>
+                <div class="btn btn-danger cancel">Thoát</div>
+
+            </div>
+            <div class="close-icon">
+                <i class="far fa-times-circle"></i>
+            </div>
+        </div>
     </div>
     <button id="test-click">đâsdsad</button>
     <div class="text-container" style="background-color: aqua"></div>
-<script src="js/jquery.min.js"></script>
-<script src="js/froala_editor.pkgd.min.js"></script>
-<script src="js/highlight.min.js"></script>
-<!-- <script> $(function() { $('textarea').froalaEditor() }); 
+    <script src="js/jquery.min.js"></script>
+    <script src="js/boostrap-4.0.0-dist/js/bootstrap.min.js"></script>
+    <script src="js/froala_editor.pkgd.min.js"></script>
+    <script src="js/highlight.min.js"></script>
+    <!-- <script> $(function() { $('textarea').froalaEditor() }); 
 </script> -->
-<script src="js/insert-button.js"></script>
+    <script src="js/insert-button.js"></script>
 
-<script>
+    <script>
 
 // $(document).ready(function() {
 //     $('#test-click').click(function(){
@@ -82,17 +87,12 @@
 //     hljs.highlightBlock(block);
 //   });
 //     })
-  
+
 // });
     // hljs.initHighlightingOnLoad();
-</script>
-<script>
-    
-    var y = 1;
-    var x = y = typeof x;
-  x;
-</script>
+    </script>
 
 
 </body>
+
 </html>

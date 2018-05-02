@@ -4,5 +4,71 @@
     box-sizing: border-box;
 }
 #highlight-popup {
-    display: none;
+   width: 100%;
+   height: 100%;
+   position: fixed;
+   top: 0;
+   left: 0;
+   background-color: rgba(0, 0, 0, 0.493);
+   z-index: 100;
+   display: none;
+}
+
+.highlight__wrap {
+   width: 800px;
+height: 90%;
+   margin: auto;
+background-color:  white;
+   
+margin-top: 30px;
+   padding: 15px;
+position: relative;
+}
+
+.language__list {
+    margin-bottom: 5px;
+}
+
+.hljs-popup__title {
+    font-size: 20px;
+    margin-bottom: 15px;
+    letter-spacing:  0.5px;
+    word-spacing: 1px;
+}
+
+.hljs-popup__lang {}
+.hljs-popup__lang-title{
+    word-spacing:  1px;
+    letter-spacing: 0.5px;
+    margin-bottom: 5px;
+}
+.hljs-popup__text-content {}
+.hljs-popup_submit {}
+.hljs-popup_submit::after {
+    content: "";
+    display: block;
+    clear: both;
+
+}
+.cancel {
+    width: 80px;
+    float: right;
+}
+.submit {
+    width: 80px;
+    float: right;
+    margin-left: 5px;
+}
+.close-icon {
+    display: inline-block;
+    position: absolute;
+    top: -20px;
+    right: -10px;
+    color: #dc3545;
+    font-size: 25px;
+    /* transform: translate(-50%,50%); */
+}
+.hljs-popup__text-area {
+    width: 100%;
+    height: 400px;
 }
