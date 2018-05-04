@@ -128,7 +128,7 @@ $(function () {
 
       if (!isEdit) {
         //insert new code
-        getThis.html.insert(`<p><div data-id-code-input='${idCodeInput}'>${getTextHighlighted}</div></p><p></p>`);
+        getThis.html.insert(`<div data-id-code-input='${idCodeInput}'>${getTextHighlighted}</div><p></p>`);
         // insert event double click
         $(`div[data-id-code-input='${idCodeInput}']`).attr('ondblclick', `modify(${idCodeInput},this)`);
         //storage code
