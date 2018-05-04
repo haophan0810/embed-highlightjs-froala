@@ -14,32 +14,15 @@
     <link rel="stylesheet" href="css/css.css">
     <link rel="stylesheet" href="css/froala_style.min.css">
     <link rel="stylesheet" href="css/froala_editor.pkgd.min.css">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/default.min.css">
+    <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/zenburn.min.css"> -->
 
 </head>
 
 <body>
-
+    <!-- contain froala -->
     <textarea id="froala-content"></textarea>
-    <pre class="test-pre"></pre>
-    <!-- TEST HIGHLIGHT JS -->
-    <!-- <pre><code class="css">
-        [
-  {
-    "title": "apples",
-    "count": [12000, 20000],
-    "description": {"text": "...", "sensitive": false}
-  },
-  {
-    "title": "oranges",
-    "count": [17500, null],
-    "description": {"text": "...", "sensitive": false}
-  }
-]
-
-
-    </code></pre> -->
-
+    <!-- POPUP -->
     <div id="highlight-popup" class="container-fluid">
         <div class="highlight__wrap">
             <div class="text-capitalize hljs-popup__title">
@@ -50,13 +33,13 @@
                     Lựa chọn ngôn ngữ
                 </div>
                 <select class="language__list" name="" id="list-language">
-                    <option value="">Not - set</option>
+                    <option value>Not set</option>
                     
 
                 </select>
             </div>
             <div class="hljs-popup__text-content">
-                <textarea id="input-code" class="hljs-popup__text-area" name="" id="" cols="30" rows="10"></textarea>
+                <textarea id="input-code" placeholder="insert code here..." class="hljs-popup__text-area" name=""  cols="30" rows="10"></textarea>
             </div>
             <div class="hljs-popup_submit">
                 <div class="btn btn-success submit">Đồng ý</div>
@@ -64,12 +47,19 @@
 
             </div>
             <div class="close-icon">
-                <i class="far fa-times-circle"></i>
+                <i class="fas fa-times"></i>
             </div>
         </div>
     </div>
-    <button id="test-click">đâsdsad</button>
+    <!-- contain code input -->
+    <div id="store-code-input">
+
+    </div>
+
+    <!-- Contain highlighted code -->
     <div class="text-container" style="background-color: aqua"></div>
+    
+    
     <script src="js/jquery.min.js"></script>
     <script src="js/boostrap-4.0.0-dist/js/bootstrap.min.js"></script>
     <script src="js/froala_editor.pkgd.min.js"></script>

@@ -1,7 +1,25 @@
 
-function test() {
-  alert('vao day chua');
+let isEdit = false;
+let idCodeInput = 1;
+let currentCodeEdit = 0;
+
+function modify(dataCodeInput, _this) {
+  isEdit = true;
+  currentCodeEdit = dataCodeInput;
+  // console.log('this :', _this);
+  // console.log('this.text() :', $(_this).html());
+  let getCodeInput = $(`#code-input-${dataCodeInput} pre code`).text();
+  console.log('getCodeInput :', getCodeInput);
+  // $('#input-code').html("");
+  
+  // $('#input-code').html(getCodeInput);
+
+  $('#input-code').val(getCodeInput);
+  
+  $('#highlight-popup').css('display', 'block');
+  // console.log('isEdit :', isEdit);
 }
+
 $(function () {
   let getThis;
   let languages = [
@@ -50,43 +68,25 @@ $(function () {
       getThis = this;
       $('#input-code').val("");
       $("#highlight-popup").css("display", "block");
-
+      // focus to textarea popup
+      $('#input-code').focus();
+      
       console.log(getThis);
-      // var codeInput = prompt("Please enter your name",);
-      // console.log("input", codeInput);
-      // if (codeInput != null) {
-      //replace (\n) -> <br>
-      // var textContent= codeInput.replace(/\n/g,"<br/>");
-      // console.log("textContent", textContent);
 
-      // console.log(textContent);
-      // move text-content to div container
-      // $(".text-container").html("<pre class='js-insert-text'><code>"+ codeInput + "</code></pre>");
-
-      // highlight code of div container
-      // $('pre code').each(function(i, block) {
-      // console.log(i);
-      // hljs.highlightBlock(block);
-      // });
-      // set attribute : not edit text
-      // $('pre.js-insert-text').attr("contenteditable","false");
-      // get html code highlighted
-
-      // var getTextHighlighted = $(".text-container").html();
-      // console.log(getTextHighlighted);
-      // this.html.insert(getTextHighlighted+"<p></p>");
-      // this.html.insert("<pre><code>"+ getTextHighlighted + "</code></pre>");
-
-      // this.html.insert(a);
-      // 
-      // }
     }
   });
 
 
   $('textarea#froala-content').froalaEditor({
     // Add the custom buttons in the toolbarButtons list, after the separator.
-    toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline', 'strikeThrough', 'subscript', 'superscript', '|', 'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|', 'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent', 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile', 'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR', 'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|', 'undo', 'redo', 'insert']
+    toolbarButtons: ['fullscreen', 'bold', 'italic', 'underline',
+      'strikeThrough', 'subscript', 'superscript', '|',
+      'fontFamily', 'fontSize', 'color', 'inlineStyle', 'paragraphStyle', '|',
+      'paragraphFormat', 'align', 'formatOL', 'formatUL', 'outdent', 'indent'
+      , 'quote', '-', 'insertLink', 'insertImage', 'insertVideo', 'insertFile',
+      'insertTable', '|', 'emoticons', 'specialCharacters', 'insertHR',
+      'selectAll', 'clearFormatting', '|', 'print', 'help', 'html', '|',
+      'undo', 'redo', 'insert']
 
   })
   //insert language to select
@@ -96,6 +96,7 @@ $(function () {
 
   // handle event when click submit
   $('.submit').click(function () {
+    // $.FroalaEditor.BLOCK_TAGS = ['address', 'article', 'aside', 'audio', 'blockquote', 'canvas', 'dd',  'dl', 'dt', 'fieldset', 'figcaption', 'figure', 'footer', 'form', 'h1', 'h2', 'h3', 'h4', 'h5', 'h6', 'header', 'hgroup', 'hr', 'li', 'main', 'nav', 'noscript', 'ol', 'output', 'p', 'pre', 'table', 'tbody', 'td', 'tfoot', 'th', 'thead', 'tr', 'ul', 'video'];
     // get class name of languages
     let lang = $('#list-language').val();
     // get text input
@@ -104,25 +105,61 @@ $(function () {
       codeInput = codeInput.replace(/'&'/g, '&amp;')
         .replace(/</g, "&lt;")
         .replace(/>/g, "&gt;");
+
       console.log('codeInput :', codeInput);
       // move to text-container
-      $(".text-container").html(`<pre id='test-new' onclick='test()' class='${lang} hljs js-insert-text'><code>${codeInput} </code></pre>`);
+
+      $(".text-container")
+        .html(`<pre class='${lang} hljs js-insert-text'><code>${codeInput} </code></pre>`);
+
       // highlight code of div container
-      $('pre code').each(function (i, block) {
+      $('pre.js-insert-text code').each(function (i, block) {
         console.log(i);
         hljs.highlightBlock(block);
       });
+
       // set attribute : not edit text
       $('pre.js-insert-text').attr("contenteditable", "false");
 
       // get html code highlighted
       var getTextHighlighted = $(".text-container").html();
+      // getTextHighlighted.replace(/"<br>"/g,'\n');
       console.log('getTextHighlighted :', getTextHighlighted);
 
-       getThis.html.insert(`<p class='testhl'>${getTextHighlighted}</p><p></p>`);
+      if (!isEdit) {
+        //insert new code
+        getThis.html.insert(`<p><div data-id-code-input='${idCodeInput}'>${getTextHighlighted}</div></p><p></p>`);
+        // insert event double click
+        $(`div[data-id-code-input='${idCodeInput}']`).attr('ondblclick', `modify(${idCodeInput},this)`);
+        //storage code
+        $('#store-code-input')
+          .append(`<div id='code-input-${idCodeInput}'><pre><code>${codeInput}</code><pre></div>`);
+        idCodeInput += 1;
+
+      } else {
+        // edit code highlighted
+        isEdit = false;
+        // change code edited
+        $(`div[data-id-code-input='${currentCodeEdit}']`).html(getTextHighlighted);
+        // change code storaged
+        $(`#code-input-${currentCodeEdit}`).html(`<pre><code>${codeInput}</code></pre>`);
+        console.log('isEdit :', isEdit);
+      }
+      // getThis.html.insert(`<div data-id-code-input='${idCodeInput}'>${getTextHighlighted}</div><p></p>`);
+
+      // getThis.html.insert(`${getTextHighlighted}<p></p>`);
       // getThis.html.insert("<pre><code>" + getTextHighlighted + "</code></pre>");
       // console.log(codeInput);
       // console.log($('#input-code'));
+
+      // add function modify
+      // $(`div[data-id-code-input='${idCodeInput}']`).attr('ondblclick',`modify(${idCodeInput},this)`);
+
+      // move codeInput to store
+      // $('#store-code-input')
+      // .append(`<div id='code-input-${idCodeInput}'><pre><code>${codeInput}</code><pre></div>`);
+      // idCodeInput+=1;
+      //close popup
       $("#highlight-popup").css("display", "none");
 
     } else {
@@ -133,29 +170,25 @@ $(function () {
   })
 
 
-  // .replace(/\n/g,"<br/>")
+  // click close
 
-  //handle edit highlight
-  // console.log($.FroalaEditor) ;
+  $('.cancel,.close-icon').click(function () {
+    if (isEdit) {
+      let dataStore = $(`#code-input-${currentCodeEdit}`).text();
+      let dataCurrent = $(`#input-code`).val();
+      if (dataStore != dataCurrent) {
+        if (confirm("You have changed some options. Are you sure you want to close the dialog window?")) {
+          $('#highlight-popup').css("display", "none");
+          // $('#input-code').val("");
+          
 
-});
-$('.fr-element.fr-view').on('click', function (e) {
-  // Do something here.
-  console.log(e);
-  alert('hh');
-});
+        } else {
+         return;
+        }
+      }
+    }
+    $('#highlight-popup').css("display", "none");
 
 
-$('.js-insert-text').on('click', function (e) {
-  // Do something here.
-  console.log(e);
-  alert('hh');
-});
-
-$('#test-new').on('click', function () {
-  alert('ffd');
-})
-
-$('.js-insert-text').on('froalaEditor.click', function (e, editor, clickEvent) {
-  // Do something here.
+  })
 });
